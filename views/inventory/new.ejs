@@ -1,0 +1,35 @@
+<% include ../partials/header %>
+
+<div class="container">
+  <h1 class="text-center py-5">
+    Whats new in the WareHouse? Talk to me 😉😎😋.
+  </h1>
+    <form method="POST" action="/inventory">
+        <div class="form-group">
+           <label for="Item">Item:</label>
+           <input class="form-control" type="text" name="item" value="" placeholder="Item" required>
+        </div>
+        <div class="form-group">
+           <label for="author">Store Keeper:</label>
+           <input class="form-control" type="text" name="storeKeeper" value="" placeholder="Store Keeper" required>
+        </div>
+        <div class="form-group">
+           <label for="Item">Status:</label>
+           <input class="form-control" type="text" name="status" value="" placeholder="Status" required>
+        </div>
+        <div class="form-group">
+           <label for="Item">Quantity:</label>
+           <input class="form-control" type="number" name="quantity" value="" placeholder="Quantity" required>
+        </div>
+        <div class="form-group">
+           <label for="Item">Price:</label>
+           <input class="form-control" type="number" name="price" value="" placeholder="Price" required>
+        </div>
+        <div class="form-group">
+           <button type="Submit">Submit</button>
+        </div>
+    </form>
+    <a href="/inventory">Go Back</a>
+</div>
+
+<% include ../partials/footer %>

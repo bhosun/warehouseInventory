@@ -1,0 +1,46 @@
+<% include ../partials/header %>
+
+<h1 class="text-center d-5 py-4">Details Of The Product 📝📓</h1>
+
+<div class="container text-center d-flex justify-content-center">
+    <table width="600">
+        <thead>
+            <tr>
+                <th>Details: </th>
+                <th>Value   </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td> Item:  </td>
+                <td><%= stuff.item %></td>
+            </tr>
+            <tr>
+                <td> storeKeeper:  </td>
+                <td><%= stuff.storeKeeper %></td>
+            </tr>
+            <tr>
+                <td> Status:  </td>
+                <td><%= stuff.status %></td>
+            </tr>
+            <tr>
+                <td> Quantity:  </td>
+                <td><%= stuff.quantity %></td>
+            </tr>
+            <tr>
+                <td> Price:  </td>
+                <td><%= stuff.price %></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+    <div class="d-flex justify-content-center py-3 btn-tool">
+        <a href="/inventory/<%= stuff._id %>/edit" class="btn btn-info btn-lg mr-5"> Edit </a>
+        <form id="delete-form" action="/inventory/<%= stuff._id %>?_method=DELETE" method="POST">
+            <button class="btn btn-danger btn-lg ml-3"> Delete </button>        
+        </form>
+    </div>
+
+<% include ../partials/footer %>
