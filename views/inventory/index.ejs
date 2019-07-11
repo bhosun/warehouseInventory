@@ -19,7 +19,7 @@
           </tr>
         </thead>
         <tbody>
-          <% var quant = [], price = []; %>
+          <% var quantity = [], price = [];%>
 
           <% inventory.forEach(function(stuff){ %>
           <tr>
@@ -29,33 +29,21 @@
             </td>
             <td class="item-stock"><%= stuff.status %></td>
             <td class="item-qty"><%= stuff.quantity %> ✖</td>
-            <% quant.push(stuff.quantity) %>
+            <% quantity.push(parseInt(stuff.quantity)) %>
             <td class="item-price"> $<%= stuff.price %></td>
-            <% price.push(stuff.price) %>
+            <% price.push(parseInt(stuff.price)) %>
             <td class="item-price text-center"><a href="/inventory/<%= stuff._id %>">More</a></td>
           </tr>
-          <% }); %>
-
-          <% var quantm = quant.map(function(i) { %>
-              <% return parseInt(i, 10); %>
-          <% }) %>
-
-          <% var pricem = price.map(function(i) { %>
-              <% return parseInt(i, 10); %>
-          <% }) %>
-          
-          <% var sum = 0 %>
-          <% for(i = 0; i < quantm.length; i++) {sum += quantm[i] * pricem[i]} %>
-          
-          <% var quantmr = quantm.reduce(function(a, b) {return a + b; }, 0)%>
-          <% var pricemr = pricem.reduce(function(a, b) {return a + b; }, 0)%>
-
-          <% var perce = (0.1 * sum) %>
-
-          <% var perc = perce.toFixed(2); %>
-
-          <% var total = (sum - perc) %>
-
+          <% }); %> 
+          <% var sum = 0;  %>
+          <% var percentage = 0;%>
+          <% var total = 0;%>
+          <% for(var i = 0; i < quantity.length; i++) {
+            sum += quantity[i] * price[i];
+          }%>
+          <% percentage = 0.1 * sum; %>
+          <% Math.round(percentage); %>
+          <% total = sum - percentage; %>
         </tbody>
         <tfoot>
           <tr class="text-offset">
@@ -64,11 +52,11 @@
           </tr>
           <tr class="text-offset">
             <td colspan="3">Tax</td>
-            <td> - $<%= perc %></td>
+            <td> - $<%= percentage %></td>
           </tr>
           <tr>
             <td colspan="3">Total</td>
-            <td>$<%= total %></td>
+            <td>$<%=  total %></td>
           </tr>
         </tfoot>
       </table>
@@ -79,4 +67,3 @@
 </html>
 
 <% include ../partials/footer %>
-

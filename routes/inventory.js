@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 var db = require("../models/inventory");
-var middleware = require("../middleware/index");
 
 //  INVENTORY ROUTES
 
@@ -17,7 +16,7 @@ router.get("/", function(req, res){
 });
 
 // post route
-router.post("/", middleware.isLoggedIn, function(req, res){
+router.post("/", function(req, res){
     var item = req.body.item;
     var storeKeeper = req.body.storeKeeper;
     var status = req.body.status;
@@ -36,7 +35,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 });
 
 // New Route
-router.get("/new", middleware.isLoggedIn, function(req, res){
+router.get("/new", function(req, res){
    res.render("inventory/new");
 });
 

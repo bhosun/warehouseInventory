@@ -8,15 +8,13 @@ var express         = require("express"),
 	methodOverride  = require("method-override");
     db              = require("./models/inventory"),
     User            = require("./models/user");
-    // seedDB          = require("./seeds");
 
+require('dotenv').config()
 
 // Require Routes
-var inventoryRoutes = require("./routes/inventory"),
-    indexRoutes     = require("./routes/index");
+var inventoryRoutes = require("./routes/inventory");
 
-
-mongoose.connect("mongodb://localhost:27017/databaseInventory", { useNewUrlParser: true });
+mongoose.connect(process.env.DB_URL, { useNewUrlParser: true });
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('port', process.env.PORT || 3000);
@@ -33,12 +31,6 @@ app.use(require("express-session")({
     saveUninitialized: false
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
 app.use(function(req, res, next) {
 	res.locals.currentUser = req.user;
 	res.locals.error	   = req.flash("error");
@@ -46,7 +38,11 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use("/", indexRoutes);
+// Landing Page
+app.get("/", function(req, res){
+    res.render("landing");
+});
+
 app.use("/inventory", inventoryRoutes);
 
 
